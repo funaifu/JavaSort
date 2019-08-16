@@ -2,11 +2,7 @@ package com.fnf.sort;
 
 import android.util.Log;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * @ProjectName: JavaSort
@@ -88,6 +84,83 @@ public class Sort2 {
             Arrays.sort(stones);
         } while (stones.length > 1);
         return newArr[0];
+    }
+
+    /**
+     * @param a
+     * @param b
+     * @param c
+     * @return
+     */
+    public int[] numMovesStones(int a, int b, int c) {
+        int[] answer = new int[2];
+        int min = Math.min(a, Math.min(b, c));
+        int max = Math.max(a, Math.max(b, c));
+        int center = a + b + c - max - min;
+        if (max - center < 2 && center - min < 2)
+            answer[0] = 0;
+        else if (max - center > 2 && center - min > 2)
+            answer[0] = 2;
+        else
+            answer[0] = 1;
+
+        answer[1] = max - min - 2;
+        return answer;
+    }
+
+    /**
+     * 山脉数据
+     *
+     * @param A
+     * @return
+     */
+    public boolean validMountainArray(int[] A) {
+        int length = A.length;
+        if (length < 3)
+            return false;
+        int y = 0;
+
+        while (y + 1 < length && A[y] < A[y + 1])
+            y++;
+        if (y == 0 || y == length - 1)
+            return false;
+        while (y + 1 < length && A[y] > A[y + 1])
+            y++;
+        return y == length - 1;
+    }
+//    给你一个由一些多米诺骨牌组成的列表 dominoes。
+//
+//    如果其中某一张多米诺骨牌可以通过旋转 0 度或 180 度得到另一张多米诺骨牌，我们就认为这两张牌是等价的。
+//
+//    形式上，dominoes[i] = [a, b] 和 dominoes[j] = [c, d] 等价的前提是 a==c 且 b==d，或是 a==d 且 b==c。
+//
+//    在 0 <= i < j < dominoes.length 的前提下，找出满足 dominoes[i] 和 dominoes[j] 等价的骨牌对 (i, j) 的数量。
+
+
+    public int numEquivDominoPairs(int[][] dominoes) {
+        int count = 0;
+        int len = dominoes.length;
+        int x = len;
+        int y = x - 1;
+        int i = 0;
+        int j = 0;
+        while (i <= y * (y - 1)) {
+            int index = i % (len - 1);
+            if (index == 0) {
+                j += 1;
+            }
+            if (index + j >= len) {
+                continue;
+            }
+            int[] current = dominoes[index];
+            int[] next = dominoes[index + j];
+            if ((current[0] == next[0] && current[1] == next[1])
+                    || (current[0] == next[1] && current[1] == next[0])) {
+                count += 1;
+            }
+            i += 1;
+        }
+        return count;
     }
 
 }
