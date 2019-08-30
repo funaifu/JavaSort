@@ -21,13 +21,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Sort2 sort2 = new Sort2();
+        QuickSort quickSort = new QuickSort();
+        quickSort.execute();
+//        Fibonacci fibonacci = new Fibonacci();
+//        fibonacci.printlnByFor(40);
+//        Sort2 sort2 = new Sort2();
 //        int[] ints = sort2.numMovesStones(5, 1, 3);
 //        sort2.displace(nums, 3);
-        int count = sort2.numEquivDominoPairs(arr);
+//        int count = sort2.numEquivDominoPairs(arr);
 //        for (int anInt : ints) {
 //
-        Log.i("onCreate", "count-------------" + count);
+//        EnumTest[] values = EnumTest.values();
+//        for (int i = 0; i < values.length; i++) {
+//            Log.i("onCreate", "count-------------" + values[i].name() + "----" + values[i].getDesc());
+//        }
 //        }
     }
 
